@@ -1,0 +1,40 @@
+<h3>Using &#64;if and &#64;for and iterating array in html tenplate!</h3>
+<!-- use ngModel for two-way binding -->
+<input type="number" [(ngModel)]="mybook1.bkid"   placeholder="bookid" >
+<input type="text" [(ngModel)]="mybook1.bkname"   placeholder="bookname" >
+<input type="number" [(ngModel)]="mybook1.bkprice"   placeholder="bookprice" >
+<button (click)="addBook()">AddBook</button>
+<hr>
+<div>
+@if(mybook1.bkid!=0 && mybook1.bkname!='')
+{
+<i>Current book details:-</i> <br/>
+{{mybook1.bkid}} <br/>
+{{mybook1.bkname}} <br/>
+{{mybook1.bkprice}} <br/>
+}
+</div>
+@if(status!='')
+{
+<hr/>
+{{status}}
+}
+<hr/>
+<table>
+<thead>
+    <tr>
+      <th>bookid</th>
+      <th>bookname</th>
+      <th>bookprice</th>
+    </tr>
+</thead>
+<tbody>
+@for (book of bookarr; track book.bkid) {
+     <tr>
+       <td>{{book.bkid}}</td>
+       <td>{{book.bkname}}</td>
+       <td>{{book.bkprice}}</td>
+     </tr>
+    }
+</tbody> 
+</table>
