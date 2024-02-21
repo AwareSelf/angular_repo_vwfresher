@@ -1,0 +1,38 @@
+<h3>listbook of all registered books!</h3>
+<button (click)='listbooks()' >List Book Details </button>
+@if( this.bookarr.length>0)
+{
+<table>
+    <thead>
+        <tr>
+          <th>bookid</th>
+          <th>bookname</th>
+          <th>bookprice</th>
+        </tr>
+    </thead>
+    <tbody>
+    @for (book of bookarr; track book.bkid) {
+         <tr>
+           <td>{{book.bkid}}</td>
+           <td>{{book.bkname}}</td>
+           <td>{{book.bkprice}}</td>
+           <td> <button (click)='delBook(book)'>Delete</button>
+            <td> <button (click)='editBook(book)'>Edit</button>
+         </tr>
+        }
+    </tbody> 
+    </table>
+
+    <div *ngIf='editflag'>
+        <hr>
+        <input [(ngModel)]='temp.bkname' placeholder='bookname'/>
+        <input [(ngModel)]='temp.bkprice' placeholder='bookprice' />
+        <button (click)='updateBook(temp)'>Ok</button>
+        <button (click)='cancelBook(temp)'>Cancel</button>
+    </div>
+}
+@else
+{
+    <p>No Book Registered yet!</p>
+}   
+    
