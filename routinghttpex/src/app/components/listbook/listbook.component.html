@@ -16,24 +16,27 @@
            <td>{{book.id}}</td>
            <td>{{book.bkname}}</td>
            <td>{{book.bkprice}}</td>
-           <!--
+        
            <td> <button (click)='delBook(book)'>Delete</button>
-            <td> <button (click)='editBook(book)'>Edit</button>
-                -->
+            <td> <button (click)='editBook(book)'>Edit</button> 
+                
          </tr>
         }
     </tbody> 
     </table>
 
-    <!--
-    <div *ngIf='editflag'>
+    @if(editflag==true)
+    {
+    <div>
         <hr>
+        <input [(ngModel)]='temp.id' placeholder='book id' disabled/>
         <input [(ngModel)]='temp.bkname' placeholder='bookname'/>
         <input [(ngModel)]='temp.bkprice' placeholder='bookprice' />
         <button (click)='updateBook(temp)'>Ok</button>
         <button (click)='cancelBook(temp)'>Cancel</button>
     </div>
-    -->
+    }
+
 }
 @else
 {

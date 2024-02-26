@@ -8,7 +8,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable } from 'rxjs';
 
 import {  throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, filter, map } from 'rxjs/operators';
 import { Book } from '../model/Book';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class BookdaoService {
    constructor(private httpClient: HttpClient){ }
 
    create(book:Book): Observable<Book> {
-    
+
     return this.httpClient.post<Book>(this.apiServer + '/books', JSON.stringify(book), 
     this.httpOptions)
     .pipe(
@@ -42,6 +42,9 @@ export class BookdaoService {
     .pipe(
       catchError(this.errorHandler)
     )
+  //  .pipe(filter(book=>book.bkprice>=500))
+   
+  
   }
 
   getAll(): Observable<Book[]> {
@@ -49,14 +52,12 @@ export class BookdaoService {
     .pipe(
       catchError(this.errorHandler)
     )
+   
   }
   
   update(id:number, book:Book): Observable<Book> {
-    return this.httpClient.put<Book>(this.apiServer + '/books/' + id, JSON.stringify(book), 
-    this.httpOptions)
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    return this.httpClient.put<Book>(this.apiServer + '/books/' + id, JSON.stringify(book),this.httpOptions)
+                                  .pipe(catchError(this.errorHandler))
   }
 
   delete(id:number){
@@ -66,6 +67,8 @@ export class BookdaoService {
     )
   }
   errorHandler(error:HttpErrorResponse) {
+
+    console.log('inside error handler method callback registered in catchError() operator function');
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
       // Get client-side error
@@ -74,7 +77,7 @@ export class BookdaoService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    console.log(errorMessage);
+    console.log("error msg inside errorHandler:"+errorMessage);
     return throwError(() => error);
  }
    

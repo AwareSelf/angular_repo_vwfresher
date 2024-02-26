@@ -78,13 +78,23 @@ export class ListbookComponent {
     
   }
 
-  /*
+
+  
+
   delBook(b:Book)
   {
-    this.bookser.deleteBook(b);
-    this.bookarr=this.bookser.getallbooks();
-  }
+    this.bookser.delete(b.id).subscribe(res=>{
+      console.log('book with book id:'+b.id+' deleted successfully');
+      this.bookser.getAll().subscribe((res:Book[])=>{
+           console.log('after delete get fresh list of all books from server...');
+           this.bookarr = res;
+      })
+    })
 
+  
+  }
+  
+  
   editBook(b:Book)
   {
     console.log('inside editBook');
@@ -94,9 +104,16 @@ export class ListbookComponent {
 
    updateBook(b:Book)
    {
-      this.bookser.updateBook(b);
-     this.bookarr = this.bookser.getallbooks();
-     this.editflag=false;
+      this.bookser.update(b.id,b).subscribe(res=>{
+        console.log(res);
+      this.bookser.getAll().subscribe((res:Book[])=>{
+                                          this.bookarr = res;
+                                        });
+        this.editflag=false;
+      
+      });
+
+    
    }
    
    cancelBook(b:Book)
@@ -104,7 +121,7 @@ export class ListbookComponent {
     this.editflag=false;
      return;
    }
-  */
+  
 
 
 

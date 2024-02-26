@@ -49,8 +49,6 @@ export class RegisterbookComponent {
       },
        error: (err:HttpErrorResponse) => {
           console.log('Book not created, as post failed!')
-          console.log(err);
-          console.log(err.message);
           this.status='book:'+ tempbook.toString()+ ',post call failed!';
           RegisterbookComponent.bkidcnt= tempbook.id;
           this.mybook.id=tempbook.id;
