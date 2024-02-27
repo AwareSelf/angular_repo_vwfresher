@@ -4,6 +4,7 @@ import { BookdaoService } from '../../services/bookdao.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from './filter.pipe';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class ListbookComponent {
   editflag:boolean;
   temp!:Book;
   searchText:string;
+  $bklst: Observable<Book[]>|null = null;
+  $bklst1: Observable<Book[]>|null = null;
 
   constructor(bookser:BookdaoService)
   {
@@ -29,6 +32,10 @@ export class ListbookComponent {
     this.bookser = bookser;
     this.searchText='';
 
+    //using async pipe to display observable data
+    this.$bklst = this.bookser.getAll();
+
+    //using subscribe to collect observable data
     this.bookser.getAll().subscribe({
      next:(res:Book[])=>{
       this.bookarr = res; 
@@ -78,6 +85,17 @@ export class ListbookComponent {
     if(this.bookarr.length===0)
       console.log('book array is empty');
     
+    
+  }
+
+  //using observable variable as property and async pipe
+  listbooks1():void
+  {
+    console.log('inside list books1');
+   
+   this.$bklst1 = this.bookser.getAll();
+
+  
     
   }
 

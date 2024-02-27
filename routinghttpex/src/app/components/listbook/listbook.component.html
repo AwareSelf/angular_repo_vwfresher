@@ -1,6 +1,14 @@
 <h3>listbook of all registered books!</h3>
 <button (click)='listbooks()' >List Book Details </button>
+<button (click)='listbooks1()' >List Book Details (using async pipe) </button>
+@if($bklst1!=null)
+{
+<p>{{$bklst1|async|json}}</p>
+}
 <input [(ngModel)]="searchText" placeholder="search text goes here">
+<hr>
+<p>{{$bklst|async|json}}</p>
+<hr>
 @if( this.bookarr.length>0)
 {
 <table>
