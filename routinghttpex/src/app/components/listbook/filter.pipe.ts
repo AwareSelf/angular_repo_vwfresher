@@ -3,7 +3,7 @@ import { Book } from '../../model/Book';
 
 
 @Pipe({
-  name: 'filter',
+  name: 'bkfilter',
   standalone:true
 })
 export class FilterPipe implements PipeTransform {
